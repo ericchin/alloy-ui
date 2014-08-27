@@ -1,10 +1,3 @@
-/**
- * The TreeNode Utility
- *
- * @module aui-tree
- * @submodule aui-tree-node
- */
-
 var Lang = A.Lang,
 	isString = Lang.isString,
 	isBoolean = Lang.isBoolean,
@@ -1481,13 +1474,17 @@ var TreeNodeTask = A.Component.create(
 							var hasUncheckedChild = false;
 
 							parentNode.eachChildren(function(child) {
-								if ((child !== instance) && !child.isChecked()) {
+                                var hasClassCSSTreeNodeUnchecked = child.get(CONTENT_BOX).hasClass(CSS_TREE_NODE_CHILD_UNCHECKED);
+
+								if (((child !== instance) && !child.isChecked()) ||
+                                    hasClassCSSTreeNodeUnchecked) {
+
 									hasUncheckedChild = true;
 								}
 							});
 
 							if (!hasUncheckedChild) {
-								parentNode.get(CONTENT_BOX).removeClass(CSS_TREE_NODE_CHILD_UNCHECKED);
+							    parentNode.get(CONTENT_BOX).removeClass(CSS_TREE_NODE_CHILD_UNCHECKED);
 							}
 						}
 					}
